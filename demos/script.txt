@@ -61,9 +61,17 @@ create app
             add to expected 
         run test 
 
-        
+
 
             
 
 
 
+
+https://nodejs.org/api/esm.html#esm_experimental_json_modules
+https://flaviocopes.com/node-http-post/
+https://github.com/sqreen/funAPM/
+https://github.com/ErickWendel/sqreen-apm
+https://medium.com/@nodejs/announcing-core-node-js-support-for-ecmascript-modules-c5d6dc29b663
+https://nodejs.org/api/esm.html
+https://github.com/nvm-sh/nvm
