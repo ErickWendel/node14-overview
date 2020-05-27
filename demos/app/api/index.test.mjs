@@ -1,7 +1,7 @@
 import debug from 'debug'
 const log = debug('app')
 
-import Http from './../index.mjs'
+import Http from './index.mjs'
 import assert from 'assert'
 
 import request1 from './mocks/request1.json'

@@ -10,9 +10,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test:app": "DEBUG=app node --experimental-json-modules --experimental-top-level-await test/**.test.mjs",
+    "test:app": "DEBUG=app node --experimental-json-modules --experimental-top-level-await api/**.test.mjs",
     "test:agent": "DEBUG=agent node --experimental-json-modules --experimental-top-level-await agent/**.test.mjs",
-    "start": "node --experimental-json-modules --experimental-top-level-await index.mjs"
+    "start": "node --experimental-json-modules --experimental-top-level-await api/index.mjs"
   },
   "keywords": [],
   "author": "erickwendel",

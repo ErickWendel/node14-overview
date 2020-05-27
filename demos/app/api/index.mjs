@@ -1,8 +1,8 @@
 import Http from 'http'
  
-import database from './database.json'; 
+import database from './../database.json'; 
 
-import { start } from './agent/agent.mjs'
+import { start } from './../agent/agent.mjs'
 start(database) 
 
 import { pipeline } from 'stream'
