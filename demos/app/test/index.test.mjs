@@ -63,5 +63,5 @@ async function makeRequest(data, userId) {
     log('received', data)
     assert.deepEqual(data, expected)
 }
-
-
+ 
+process.exit(0)

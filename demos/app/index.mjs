@@ -34,10 +34,10 @@ const startServer = async (req, res) => {
     )
 
 }
-
+const port = 3000
 Http
     .createServer(startServer)
-    .listen(3000, () => console.log('running!'))
+    .listen(port, () => console.log('running! at', port))
 
 export default Http
 

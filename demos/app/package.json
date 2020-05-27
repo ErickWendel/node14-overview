@@ -1,20 +1,20 @@
 {
   "name": "app",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.mjs", 
+  "description": "Node 14 example!",
+  "main": "index.mjs",
   "type": "module",
   "dependencies": {
-    "nodemon": "^2.0.4",
+    "debug": "^4.1.1",
     "uuid": "^8.1.0"
   },
   "devDependencies": {},
   "scripts": {
-    "test:agent": "DEBUG=agent npx nodemon --exec node --experimental-json-modules --experimental-top-level-await agent/**.test.mjs",
-    "test": "DEBUG=app npx nodemon --exec node --experimental-json-modules --experimental-top-level-await test/**.test.mjs",
-    "start": "npx nodemon --exec node --experimental-json-modules --experimental-top-level-await index.mjs"
+    "test:app": "DEBUG=app node --experimental-json-modules --experimental-top-level-await test/**.test.mjs",
+    "test:agent": "DEBUG=agent node --experimental-json-modules --experimental-top-level-await agent/**.test.mjs",
+    "start": "node --experimental-json-modules --experimental-top-level-await index.mjs"
   },
   "keywords": [],
-  "author": "",
+  "author": "erickwendel",
   "license": "ISC"
 }
