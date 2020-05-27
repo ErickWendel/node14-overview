@@ -1,0 +1,69 @@
+create app
+    npm init -y
+    npm i -D nodemon
+    type module
+    add script for test
+    add script for start
+    add database.json
+
+    agent
+        agent.mjs
+            export { start }
+        agent.test.mjs
+            all
+        agent.mjs 
+            ..req.user
+        run test 
+        agent.mjs
+            create logRequest
+            create performanceObserver
+            add asyncLocalStorage on emit
+            call start
+            call finish
+        run test
+        show logs
+
+    api
+        add index.mjs 
+            import ..start 
+
+            create server
+            add start server 
+            res.end
+            export default http
+
+        create mocks
+        create api/test.mjs
+            - makeRequest
+
+            add first call
+            create expected = {}
+            ..assert.deepEqual
+
+        DEBUG=app,agent npm run test:app 
+        show logs 
+
+        api/index.mjs
+            create mapData 
+            import pipeline, promisify
+            create pipelineAsync
+            add pipelineAsync on startServer
+        run test 
+        copy result 
+        api/test.mjs
+            paste expected 
+        run test
+        api/index.test.mjs
+            add second call 
+            log response
+            ...assert 
+        run test 
+            add to expected 
+        run test 
+
+        
+
+            
+
+
+

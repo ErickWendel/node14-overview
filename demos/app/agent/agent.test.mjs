@@ -6,7 +6,6 @@ import assert from 'assert'
 import { start as InjectMiddleware } from './agent.mjs'
 
 const tracker = new assert.CallTracker();
-const serverInstance = new Server()
 
 const eventName = 'request'
 const expectedCallCount = 1
@@ -25,6 +24,7 @@ const request = {
 }
 
 InjectMiddleware(database)
+const serverInstance = new Server()
 const setHeader = tracker.calls(expectedCallCount);
 const response = { setHeader: setHeader, on(m, cb) { cb() } }
 
