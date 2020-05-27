@@ -1,6 +1,9 @@
-const { Server } = require('http')
-const assert = require('assert');
-const { start: InjectMiddleware } = require('./agent')
+import debug from 'debug' 
+const log = debug('agent')
+
+import { Server } from 'http'
+import assert from 'assert'
+import { start as InjectMiddleware } from './agent.mjs'
 
 const tracker = new assert.CallTracker();
 const serverInstance = new Server()
@@ -26,6 +29,8 @@ const setHeader = tracker.calls(expectedCallCount);
 const response = { setHeader: setHeader, on(m, cb) { cb() } }
 
 serverInstance.emit(eventName, request, response)
+
+log('user', JSON.stringify(request.user))
 
 assert.ok(request.user.requestId)
 assert.deepEqual(request.user.name, user.name)

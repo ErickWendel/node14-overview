@@ -1,10 +1,12 @@
-const Http = require('http')
+import Http from 'http'
+ 
+import database from './database.json'; 
 
-const database = require('./database.json')
-require('./agent/agent').start(database)
+import { start } from './agent/agent.mjs'
+start(database) 
 
-const { pipeline } = require('stream')
-const { promisify } = require('util')
+import { pipeline } from 'stream'
+import { promisify } from 'util'
 
 const pipelineAsync = promisify(pipeline)
 
@@ -37,9 +39,11 @@ Http
     .createServer(startServer)
     .listen(3000, () => console.log('running!'))
 
-module.exports = Http
-// curl -i -H "x-app-id: 1" -X POST -d '{"name":"erickwendel"}' http://localhost:3000
-// curl -i -H "x-app-id: 2" -X POST -d '{"name":"xyz"}' http://localhost:3000
+export default Http
+
+// curl -i -H "x-app-id: 1" -X POST -d '{"name":"ErickWendel","currency":"BRL","preferences":{"description":"movies"}}' http://localhost:3000
+// curl -i -H "x-app-id: 2" -X POST -d '{"name":"JsonBecker","currency":"CAD","preferences":null}' http://localhost:3000
+
 /*
 autocannon \
     -m POST \

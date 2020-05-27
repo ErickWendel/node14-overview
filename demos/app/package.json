@@ -2,16 +2,17 @@
   "name": "app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.mjs", 
+  "type": "module",
   "dependencies": {
     "nodemon": "^2.0.4",
     "uuid": "^8.1.0"
   },
   "devDependencies": {},
   "scripts": {
-    "test:agent": "DEBUG=agent npx nodemon test/**.test.js",
-    "test": "DEBUG=app npx nodemon test/**.test.js",
-    "start": "npx nodemon index.js"
+    "test:agent": "DEBUG=agent npx nodemon --exec node --experimental-json-modules --experimental-top-level-await agent/**.test.mjs",
+    "test": "DEBUG=app npx nodemon --exec node --experimental-json-modules --experimental-top-level-await test/**.test.mjs",
+    "start": "npx nodemon --exec node --experimental-json-modules --experimental-top-level-await index.mjs"
   },
   "keywords": [],
   "author": "",
