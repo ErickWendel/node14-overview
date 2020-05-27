@@ -1,33 +1,44 @@
-const { createServer } = require('http')
+const Http = require('http')
 
 const database = require('./database.json')
 require('./agent/agent').start(database)
 
-const { Transform, pipeline } = require('stream')
+const { pipeline } = require('stream')
 const { promisify } = require('util')
 
 const pipelineAsync = promisify(pipeline)
 
-createServer(async (req, res) => {
-    if (!req.method)
-        res.end('Hey dude!')
+const mapData = (data, lang) => {
+    const languageNames = new Intl.DisplayNames([lang], { type: 'currency' });
+
+    return JSON.stringify({
+        name: data.name,
+        currency: languageNames.of(data.currency),
+        preferences: data.preferences?.description ?? 'not found'
+    })
+}
+
+const startServer = async (req, res) => {
+    if (req.method !== 'POST')
+        return res.end('Hey dude!')
 
     await pipelineAsync(
         req,
         async function* (source) {
-            source.setEncoding('utf8')
-            for await (const item of source) {
-
-                yield item
-            }
-        }
+            for await (const item of source)
+                yield mapData(JSON.parse(item), req.user.speaks) 
+        },
+        res
     )
 
-    res.end('Hey there')
+}
 
-}).listen(3000, () => console.log('running!'))
+Http
+    .createServer(startServer)
+    .listen(3000, () => console.log('running!'))
 
-// curl -i -H "x-app-id: 1" -X POST -d '{"name":"xyz"}' http://localhost:3000 
+module.exports = Http
+// curl -i -H "x-app-id: 1" -X POST -d '{"name":"erickwendel"}' http://localhost:3000
 // curl -i -H "x-app-id: 2" -X POST -d '{"name":"xyz"}' http://localhost:3000
 /*
 autocannon \

@@ -9,7 +9,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "npx nodemon **/**.test.js",
+    "test:agent": "DEBUG=agent npx nodemon test/**.test.js",
+    "test": "npx nodemon test/**.test.js",
     "start": "npx nodemon index.js"
   },
   "keywords": [],

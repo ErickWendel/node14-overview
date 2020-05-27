@@ -1,7 +1,7 @@
 const { promises: { appendFile } } = require('fs')
 const { PerformanceObserver, performance } = require('perf_hooks');
 const { AsyncLocalStorage } = require('async_hooks');
-
+const debug = require('debug')('agent')
 const uuid = require('uuid')
 
 const asyncLocalStorage = new AsyncLocalStorage();
@@ -11,7 +11,7 @@ const obs = new PerformanceObserver((items) => {
     const [entry] = items.getEntries()
     const item = entry
 
-    console.log({
+    debug({
         name: item.name,
         duration: `${item.duration} ms`,
     });
@@ -29,7 +29,7 @@ function logRequest(msg) {
 
     const labelStart = `start-${name}-${requestId}`
     const labelEnd = `end-${name}-${requestId}`
-    console.log(`${msg}:${name}:${requestId}`)
+    debug(`${msg}:${name}:${requestId}`)
 
     if (msg === "start") {
         performance.mark(labelStart)

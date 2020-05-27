@@ -3,12 +3,12 @@
     "id": 1,
     "name": "joaozinho",
     "paidIn": "USD",
-    "speaks": ["fr", "pt-br"]
+    "speaks": "fr"
   },
   {
     "id": 2,
     "name": "jana",
     "paidIn": "BRL",
-    "speaks": ["en", "pt-br"]
+    "speaks":  "pt-br"
   }
 ]
