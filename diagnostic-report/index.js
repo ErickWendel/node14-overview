@@ -1,5 +1,6 @@
 // nvm use 13
-// nvm use 14
+// nvm use 14 Diagnostic Report goes Stable
+
 let count = 0
 while(count < 10){
     ++count
