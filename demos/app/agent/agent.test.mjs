@@ -1,6 +1,8 @@
-import debug from 'debug' 
-const log = debug('agent')
+import debug from 'debug'
+const log = debug('agent:test')
 
+import { readdir } from 'fs/promises'
+import { resolve } from 'path'
 import { Server } from 'http'
 import assert from 'assert'
 import { start as InjectMiddleware } from './agent.mjs'
@@ -8,7 +10,6 @@ import { start as InjectMiddleware } from './agent.mjs'
 const tracker = new assert.CallTracker();
 
 const eventName = 'request'
-const expectedCallCount = 1
 
 const database = [{
     "id": 1,
@@ -22,18 +23,48 @@ const request = {
         'x-app-id': user.id
     }
 }
+const response = {
+    setHeader: () => { },
+    on(m, cb) { cb() }
+}
 
 InjectMiddleware(database)
 const serverInstance = new Server()
-const setHeader = tracker.calls(expectedCallCount);
-const response = { setHeader: setHeader, on(m, cb) { cb() } }
 
-serverInstance.emit(eventName, request, response)
+{
+    const expectedCallCount = 1
+    const setHeader = tracker.calls(expectedCallCount);
+    serverInstance.emit(eventName, request, { ...response, setHeader })
 
-log('user', JSON.stringify(request.user))
+    log('user', JSON.stringify(request.user))
 
-assert.ok(request.user.requestId)
-assert.deepEqual(request.user.name, user.name)
+    assert.ok(request.user.requestId)
+    assert.deepEqual(request.user.name, user.name)
+}
+
+{
+
+
+    const reportsFolder = `${resolve()}/reports`
+    const dirBefore = await readdir(reportsFolder)
+
+    const { headers, user, ...requestData } = request
+    const messageError = "Cannot read property 'x-app-id' of undefined"
+
+    process.on('uncaughtException', async (err) => {
+        if (!(!!~err.message.indexOf(messageError)))
+            return log(err);
+
+        const dirAfter = await readdir(reportsFolder) 
+        assert.notEqual(dirBefore.length, dirAfter.length) 
+    });
+    serverInstance.emit(eventName, requestData, response)
+
+
+
+}
+
+
 
 
 process.on('exit', () => tracker.verify());

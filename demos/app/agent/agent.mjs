@@ -1,3 +1,8 @@
+process.report.reportOnUncaughtException = true
+process.report.reportOnFatalError = true
+process.report.reportOnSignal = true
+process.report.directory = './reports'
+
 import { appendFile } from 'fs/promises'
 import { PerformanceObserver, performance } from 'perf_hooks'
 import { AsyncLocalStorage } from 'async_hooks'
@@ -6,7 +11,7 @@ import { v1 } from 'uuid'
 import Http from 'http'
 
 import debug from 'debug'
-const log = debug('agent')
+const log = debug('agent:runner')
 
 const asyncLocalStorage = new AsyncLocalStorage();
 const logger = `${resolve()}/logger.log`
@@ -64,7 +69,6 @@ function start(db) {
 
         logRequest('start');
         res.on('finish', () => logRequest('finish'))
-         
         return emit.apply(this, arguments);
     };
 

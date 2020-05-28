@@ -1,9 +1,5 @@
-process.report.reportOnUncaughtException = true
-process.report.reportOnFatalError = true
-
 import debug from 'debug'
-const log = debug('app')
-
+const log = debug('app:api')
 import Http from 'http'
 
 import database from './../database.json';
@@ -18,14 +14,11 @@ const pipelineAsync = promisify(pipeline)
 
 const mapData = (lang) => new Transform({
     // autoDestroy: false,
-    destroy (error) {
-        log('called destroy automatic!!')
+    destroy(error) {
+        log('called autodestroy!!')
     },
     transform: (chunk, encoding, cb) => {
         const data = JSON.parse(chunk)
-        // simulate an error
-        if (!data.name)
-            throw new Error('unhandled error!!')
 
         const languageNames = new Intl.DisplayNames([lang], { type: 'currency' });
 
@@ -40,9 +33,9 @@ const mapData = (lang) => new Transform({
 })
 
 const startServer = async (req, res) => {
-    if (req.method !== 'POST')
-        return res.end('Hey there')
-
+    if (req.method !== 'POST') 
+        return res.send('Hey dude!')
+    
     try {
         await pipelineAsync(
             req,
@@ -50,7 +43,7 @@ const startServer = async (req, res) => {
             res
         )
     } catch (error) {
-        log('Internal server error!', error)
+        log('Internal server error!', error.message)
         return res.end('Internal server error')
     }
 }

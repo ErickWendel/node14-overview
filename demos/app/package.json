@@ -11,10 +11,14 @@
   "devDependencies": {
     "nodemon": "^2.0.4"
   },
+  
   "scripts": {
-    "test:agent": "DEBUG=agent nodemon --exec node --experimental-json-modules --experimental-top-level-await agent/**.test.mjs",
-    "test:app": "DEBUG=app nodemon --exec node --experimental-json-modules --experimental-top-level-await api/**.test.mjs",
-    "start": "DEBUG=app nodemon --exec node --experimental-json-modules --experimental-top-level-await api/index.mjs"
+    "test:agent": "DEBUG=agent:* nodemon --exec node --experimental-json-modules --experimental-top-level-await agent/**.test.mjs",
+    "test:app": "mkdir -p reports && DEBUG=app:* node --experimental-json-modules --experimental-top-level-await api/**.test.mjs",
+    "start": "DEBUG=app:* nodemon --exec node --experimental-json-modules --experimental-top-level-await api/index.mjs"
+  },
+  "nodemonConfig": {
+    "ignore": ["report*"]
   },
   "keywords": [],
   "author": "erickwendel",

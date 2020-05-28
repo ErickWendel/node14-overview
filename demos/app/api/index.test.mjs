@@ -1,5 +1,5 @@
 import debug from 'debug'
-const log = debug('app')
+const log = debug('app:test')
 
 import Http from './index.mjs'
 import assert from 'assert'
@@ -11,13 +11,13 @@ import database from './../database.json'
 const [speaksFr, speaksPt] = database
 const PORT = 3000
 
-async function makeRequest(data, userId) {
+async function makeRequest(data, userId, method = "POST") {
     const requestData = JSON.stringify(data)
     const options = {
         hostname: 'localhost',
         port: PORT,
         path: '/',
-        method: 'POST',
+        method: method,
         headers: {
             'x-app-id': `${userId}`,
             'Content-Length': requestData.length,
@@ -63,5 +63,8 @@ async function makeRequest(data, userId) {
     log('received', data)
     assert.deepEqual(data, expected)
 }
+
+
  
+
 process.exit(0)
