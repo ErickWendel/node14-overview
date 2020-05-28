@@ -20,6 +20,7 @@ create app
             add asyncLocalStorage on emit
             call start
             call finish
+            add in head process.report
         run test
         show logs
 
@@ -44,11 +45,13 @@ create app
         show logs 
 
         api/index.mjs
+            import pipeline, Transform promisify
             create mapData 
-            import pipeline, promisify
+
             create pipelineAsync
             add pipelineAsync on startServer
         run test 
+
         copy result 
         api/test.mjs
             paste expected 
