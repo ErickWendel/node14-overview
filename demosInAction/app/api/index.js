@@ -13,7 +13,6 @@ import { promisify } from 'util'
 const pipelineAsync = promisify(pipeline)
 
 const mapData = (lang) => new Transform({
-    // autoDestroy: false,
     destroy(error) {
         log('called autodestroy!!')
     },
@@ -52,19 +51,6 @@ Http
     .createServer(startServer)
     .listen(port, () => console.log('running! at', port))
 
-
-
 export default Http
-
 // curl -i -H "x-app-id: 1" -X POST -d '{"name":"ErickWendel","currency":"BRL","preferences":{"description":"movies"}}' http://localhost:3000
 // curl -i -H "x-app-id: 2" -X POST -d '{"name":"JsonBecker","currency":"CAD","preferences":null}' http://localhost:3000
-
-/*
-autocannon \
-    -m POST \
-    --body '{"name":"ErickWendel","currency":"BRL","preferences":{"description":"movies"}}' \
-    -H "x-app-id: 1"  \
-    -c 1 \
-    -d 2 \
-    http://localhost:3000
-*/

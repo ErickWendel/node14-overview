@@ -13,8 +13,8 @@
   },
   
   "scripts": {
-    "test:agent": "DEBUG=agent:* nodemon --exec node --experimental-json-modules --experimental-top-level-await agent/**.test.js",
-    "test:app": "mkdir -p reports && DEBUG=app:* nodemon --exec node --experimental-json-modules --experimental-top-level-await api/**.test.js",
+    "test:agent": "mkdir -p reports && DEBUG=agent:* nodemon --exec node --experimental-json-modules --experimental-top-level-await agent/**.test.js",
+    "test:app": "DEBUG=app:* nodemon --exec node --experimental-json-modules --experimental-top-level-await api/**.test.js",
     "start": "DEBUG=app:* nodemon --exec node --experimental-json-modules --experimental-top-level-await api/index.js"
   },
   "nodemonConfig": {
