@@ -2,8 +2,7 @@
   "name": "app",
   "version": "1.0.0",
   "description": "Node 14 example!",
-  "main": "index.mjs",
-  "type": "module",
+  "main": "index.mjs", 
   "dependencies": {
     "debug": "^4.1.1",
     "uuid": "^8.1.0"
