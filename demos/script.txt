@@ -75,3 +75,4 @@ https://github.com/ErickWendel/sqreen-apm
 https://medium.com/@nodejs/announcing-core-node-js-support-for-ecmascript-modules-c5d6dc29b663
 https://nodejs.org/api/esm.html
 https://github.com/nvm-sh/nvm
+https://medium.com/@nodejs/node-js-version-14-available-now-8170d384567e

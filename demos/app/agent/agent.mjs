@@ -64,7 +64,7 @@ function start(db) {
 
         logRequest('start');
         res.on('finish', () => logRequest('finish'))
-
+         
         return emit.apply(this, arguments);
     };
 

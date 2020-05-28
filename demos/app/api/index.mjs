@@ -1,43 +1,65 @@
+process.report.reportOnUncaughtException = true
+process.report.reportOnFatalError = true
+
+import debug from 'debug'
+const log = debug('app')
+
 import Http from 'http'
- 
-import database from './../database.json'; 
+
+import database from './../database.json';
 
 import { start } from './../agent/agent.mjs'
-start(database) 
+start(database)
 
-import { pipeline } from 'stream'
+import { pipeline, Transform } from 'stream'
 import { promisify } from 'util'
 
 const pipelineAsync = promisify(pipeline)
 
-const mapData = (data, lang) => {
-    const languageNames = new Intl.DisplayNames([lang], { type: 'currency' });
+const mapData = (lang) => new Transform({
+    // autoDestroy: false,
+    destroy (error) {
+        log('called destroy automatic!!')
+    },
+    transform: (chunk, encoding, cb) => {
+        const data = JSON.parse(chunk)
+        // simulate an error
+        if (!data.name)
+            throw new Error('unhandled error!!')
 
-    return JSON.stringify({
-        name: data.name,
-        currency: languageNames.of(data.currency),
-        preferences: data.preferences?.description ?? 'not found'
-    })
-}
+        const languageNames = new Intl.DisplayNames([lang], { type: 'currency' });
+
+        const result = JSON.stringify({
+            name: data.name,
+            currency: languageNames.of(data.currency),
+            preferences: data.preferences?.description ?? 'not found'
+        })
+
+        cb(null, result)
+    }
+})
 
 const startServer = async (req, res) => {
     if (req.method !== 'POST')
-        return res.end('Hey dude!')
+        return res.end('Hey there')
 
-    await pipelineAsync(
-        req,
-        async function* (source) {
-            for await (const item of source)
-                yield mapData(JSON.parse(item), req.user.speaks) 
-        },
-        res
-    )
-
+    try {
+        await pipelineAsync(
+            req,
+            mapData(req.user.speaks),
+            res
+        )
+    } catch (error) {
+        log('Internal server error!', error)
+        return res.end('Internal server error')
+    }
 }
 const port = 3000
 Http
     .createServer(startServer)
     .listen(port, () => console.log('running! at', port))
+
+
 
 export default Http
 
@@ -47,7 +69,7 @@ export default Http
 /*
 autocannon \
     -m POST \
-    --body '{"name":"xyz"}' \
+    --body '{"name":"ErickWendel","currency":"BRL","preferences":{"description":"movies"}}' \
     -H "x-app-id: 1"  \
     -c 1 \
     -d 2 \

@@ -14,7 +14,7 @@
   "scripts": {
     "test:agent": "DEBUG=agent nodemon --exec node --experimental-json-modules --experimental-top-level-await agent/**.test.mjs",
     "test:app": "DEBUG=app nodemon --exec node --experimental-json-modules --experimental-top-level-await api/**.test.mjs",
-    "start": "nodemon --exec node --experimental-json-modules --experimental-top-level-await api/index.mjs"
+    "start": "DEBUG=app nodemon --exec node --experimental-json-modules --experimental-top-level-await api/index.mjs"
   },
   "keywords": [],
   "author": "erickwendel",
