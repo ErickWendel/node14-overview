@@ -1,12 +1,12 @@
 import debug from 'debug'
 const log = debug('app:test')
 
-import Http from './index.mjs'
+import Http from './index.js'
 import assert from 'assert'
 
 import request1 from './mocks/request1.json'
 import request2 from './mocks/request2.json'
-import database from './../database.json'
+import database from '../database.json'
 
 const [speaksFr, speaksPt] = database
 const PORT = 3000

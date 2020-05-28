@@ -2,9 +2,9 @@ import debug from 'debug'
 const log = debug('app:api')
 import Http from 'http'
 
-import database from './../database.json';
+import database from '../database.json';
 
-import { start } from './../agent/agent.mjs'
+import { start } from '../agent/agent.js'
 start(database)
 
 import { pipeline, Transform } from 'stream'

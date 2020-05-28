@@ -5,7 +5,7 @@ import { readdir } from 'fs/promises'
 import { resolve } from 'path'
 import { Server } from 'http'
 import assert from 'assert'
-import { start as InjectMiddleware } from './agent.mjs'
+import { start as InjectMiddleware } from './agent.js'
 
 const tracker = new assert.CallTracker();
 

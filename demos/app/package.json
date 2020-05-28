@@ -2,7 +2,8 @@
   "name": "app",
   "version": "1.0.0",
   "description": "Node 14 example!",
-  "main": "index.mjs", 
+  "main": "index.mjs",
+  "type": "module",
   "dependencies": {
     "debug": "^4.1.1",
     "uuid": "^8.1.0"
@@ -12,9 +13,9 @@
   },
   
   "scripts": {
-    "test:agent": "DEBUG=agent:* nodemon --exec node --experimental-json-modules --experimental-top-level-await agent/**.test.mjs",
-    "test:app": "mkdir -p reports && DEBUG=app:* nodemon --exec node --experimental-json-modules --experimental-top-level-await api/**.test.mjs",
-    "start": "DEBUG=app:* nodemon --exec node --experimental-json-modules --experimental-top-level-await api/index.mjs"
+    "test:agent": "DEBUG=agent:* nodemon --exec node --experimental-json-modules --experimental-top-level-await agent/**.test.js",
+    "test:app": "mkdir -p reports && DEBUG=app:* nodemon --exec node --experimental-json-modules --experimental-top-level-await api/**.test.js",
+    "start": "DEBUG=app:* nodemon --exec node --experimental-json-modules --experimental-top-level-await api/index.js"
   },
   "nodemonConfig": {
     "ignore": ["report*"]
