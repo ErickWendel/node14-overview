@@ -1,9 +1,6 @@
 create app
     npm init -y
     npm i -D nodemon
-    type module
-    add script for test
-    add script for start
     add database.json
 
     agent
@@ -13,7 +10,10 @@ create app
             all
         agent.mjs 
             ..req.user
-        run test 
+    package.json
+        add script for test
+        add script for start
+    run test 
         agent.mjs
             create logRequest
             create performanceObserver
@@ -21,8 +21,8 @@ create app
             call start
             call finish
             add in head process.report
-        run test
-        show logs
+    run test
+    show logs
 
     api
         add index.mjs 
@@ -79,3 +79,5 @@ https://medium.com/@nodejs/announcing-core-node-js-support-for-ecmascript-module
 https://nodejs.org/api/esm.html
 https://github.com/nvm-sh/nvm
 https://medium.com/@nodejs/node-js-version-14-available-now-8170d384567e
+https://www.npmjs.com/package/sinon
+https://nodejs.org/api/assert.html#assert_class_assert_calltracker

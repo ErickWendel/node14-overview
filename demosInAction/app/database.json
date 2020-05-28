@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "joaozinho",
+    "paidIn": "USD",
+    "speaks": "fr"
+  },
+  {
+    "id": 2,
+    "name": "jana",
+    "paidIn": "BRL",
+    "speaks": "pt-br"
+  }
+]
