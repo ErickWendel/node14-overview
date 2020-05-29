@@ -4,13 +4,17 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "test:agent": "mkdir -p reports && DEBUG=agent:* nodemon --exec node --experimental-json-modules --experimental-top-level-await agent/**.test.js",
-    "test:app": "DEBUG=app:* nodemon --exec node --experimental-json-modules --experimental-top-level-await api/**.test.js",
+    "test": "npm run test:agent && npm run test:app",
+    "test:agent": "mkdir -p reports && DEBUG=agent:* node --experimental-json-modules --experimental-top-level-await agent/**.test.js",
+    "test:app": "DEBUG=app:* node --experimental-json-modules --experimental-top-level-await api/**.test.js",
+    "test:agent:watch": "mkdir -p reports && DEBUG=agent:* nodemon --exec node --experimental-json-modules --experimental-top-level-await agent/**.test.js",
+    "test:app:watch": "DEBUG=app:* nodemon --exec node --experimental-json-modules --experimental-top-level-await api/**.test.js",
     "start": "DEBUG=app:* nodemon --exec node --experimental-json-modules --experimental-top-level-await api/index.js"
   },
   "nodemonConfig": {
-    "ignore": ["report*"]
+    "ignore": [
+      "report*"
+    ]
   },
   "keywords": [],
   "author": "erickwendel",

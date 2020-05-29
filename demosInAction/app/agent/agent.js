@@ -59,8 +59,8 @@ function start(db) {
             return emit.apply(this, arguments);
         }
 
-        // const customerId = req.headers['x-app-id']
-        const customerId = Math.floor(Math.random() * 2) + 1;
+        const customerId = req.headers['x-app-id']
+        // const customerId = Math.floor(Math.random() * 2) + 1;
         const customer = db.find(customer => customer.id === parseInt(customerId))
         const data = { customerId, ...customer, requestId: v1() }
         res.setHeader('x-request-id', data.requestId)
